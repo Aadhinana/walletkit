@@ -1,12 +1,13 @@
 import type { UseSolanaArgs } from "@saberhq/use-solana";
 import { SolanaProvider } from "@saberhq/use-solana";
 import React, { useContext, useMemo, useState } from "react";
+import { I18nextProvider } from "react-i18next";
 
 import {
   ModalStep,
   WalletSelectorModal,
 } from "./components/WalletSelectorModal";
-import type { WalletKitArgs } from "./types";
+import type { WalletKitArgs, LangOption } from "./types";
 
 export interface WalletKit {
   connect: () => void;
@@ -15,12 +16,16 @@ export interface WalletKit {
 const WalletKitContext = React.createContext<WalletKit | null>(null);
 
 interface Props extends WalletKitArgs, UseSolanaArgs {
+  i18n?: any;
+  langOptions?: LangOption;
   children: React.ReactNode;
 }
 
 export const WalletKitProvider: React.FC<Props> = ({
   children,
   app,
+  i18n,
+  langOptions,
   initialStep = ModalStep.Intro,
   ...solanaProviderArgs
 }: Props) => {
@@ -31,17 +36,20 @@ export const WalletKitProvider: React.FC<Props> = ({
   }, []);
 
   return (
-    <SolanaProvider {...solanaProviderArgs}>
-      <WalletKitContext.Provider value={kit}>
-        <WalletSelectorModal
-          app={app}
-          initialStep={initialStep}
-          isOpen={showWalletSelector}
-          onDismiss={() => setShowWalletSelector(false)}
-        />
-        {children}
-      </WalletKitContext.Provider>
-    </SolanaProvider>
+    <I18nextProvider i18n={i18n}>
+      <SolanaProvider {...solanaProviderArgs}>
+        <WalletKitContext.Provider value={kit}>
+          <WalletSelectorModal
+            app={app}
+            initialStep={initialStep}
+            isOpen={showWalletSelector}
+            onDismiss={() => setShowWalletSelector(false)}
+            langOptions={langOptions}
+          />
+          {children}
+        </WalletKitContext.Provider>
+      </SolanaProvider>
+    </I18nextProvider>
   );
 };
 
