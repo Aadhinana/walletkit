@@ -1,32 +1,53 @@
 {
-  "name": "@gokiprotocol/walletkit-monorepo",
-  "version": "1.2.1",
+  "name": "@gokiprotocol/walletkit",
+  "version": "1.3.1",
   "description": "Wallet connector modal for Solana dApps.",
-  "repository": "git@github.com:GokiProtocol/walletkit.git",
   "author": "Goki Rajesh <goki@goki.so>",
+  "homepage": "https://github.com/GokiProtocol/walletkit#readme",
   "license": "GPL-3.0",
-  "private": true,
-  "devDependencies": {
-    "@saberhq/eslint-config-react": "^1.3.15",
-    "eslint": "^7.32.0",
-    "eslint-plugin-unused-imports": "^1.1.5",
-    "husky": "^7.0.2",
-    "lerna": "^4.0.0",
-    "lint-staged": "^11.2.2",
-    "prettier": "^2.4.1",
-    "typescript": "^4.4.3"
-  },
-  "workspaces": [
-    "packages/*"
+  "main": "dist/index.js",
+  "files": [
+    "dist/",
+    "src/"
   ],
-  "scripts": {
-    "build": "lerna run build",
-    "lint": "eslint --cache .",
-    "lint:ci": "eslint --cache . --max-warnings=0",
-    "prepare": "husky install"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GokiProtocol/walletkit.git"
   },
-  "lint-staged": {
-    "*.{ts,tsx}": "eslint --cache --fix",
-    "*.{js,json,jsx,html,css,md}": "prettier --write"
-  }
+  "scripts": {
+    "build": "tsc"
+  },
+  "bugs": {
+    "url": "https://github.com/GokiProtocol/walletkit/issues"
+  },
+  "devDependencies": {
+    "@saberhq/solana-contrib": "^1.3.14",
+    "@saberhq/use-solana": "^1.3.15",
+    "@types/react": "^17.0.27",
+    "@types/react-dom": "^17.0.9",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@reach/dialog": "^0.16.0",
+    "polished": "^4.1.3",
+    "react-device-detect": "^2.0.0",
+    "react-spring": "^9.2.6",
+    "react-use-gesture": "^9.1.3",
+    "unstated-next": "^1.1.0"
+  },
+  "peerDependencies": {
+    "@saberhq/solana-contrib": "^1.3.5",
+    "@saberhq/use-solana": "^1.3.5",
+    "@types/react": "^17.0.19",
+    "@types/react-dom": "^17.0.9",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "684a941be4638ebeee667e3c07badd3f055a1d22"
 }
